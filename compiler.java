@@ -22,6 +22,11 @@ public class compiler {
 		String str=sstr[i++];
 		while(flag==0&&i<sstr.length)
 		{
+			if(str==null||str=="")
+			{
+				str=sstr[i++];
+				continue;
+			}
 			switch(str)
 			{
 			case "BEGIN":
