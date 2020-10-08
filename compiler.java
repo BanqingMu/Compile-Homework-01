@@ -1,16 +1,26 @@
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class compiler {
 	public static int flag=0;
-	public static void main(String[] args) throws FileNotFoundException{
-		Scanner sc=new Scanner(
-				new BufferedInputStream(
-						new FileInputStream(args[0])));
-		String str=sc.next();
-		while(flag==0)
+	public static void main(String[] args) throws IOException{
+		FileInputStream fis=new FileInputStream(args[0]);
+		BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+		String string="";
+		String temp="";
+		while((temp=br.readLine())!=null)
+		{
+			string+=temp+' ';
+		}
+		br.close();
+		fis.close();
+		String[] sstr=string.split(" |\\n|\\t|\\r");
+		int i=0;
+		String str=sstr[i++];
+		while(flag==0&&i<sstr.length)
 		{
 			switch(str)
 			{
@@ -46,12 +56,12 @@ public class compiler {
 			default:
 				identify(str);
 			}
-			str=sc.next();
+			str=sstr[i++];
 		}
 		}
 	public static String transfer(String str)
 	{
-		return str.subSequence(0, 1)+str.substring(1).toLowerCase();
+		return ((String)str.subSequence(0, 1)).toUpperCase()+str.substring(1).toLowerCase();
 	}
 	public static void identify(String str)
 	{
