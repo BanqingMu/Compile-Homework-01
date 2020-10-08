@@ -1,9 +1,10 @@
+import java.util.Scanner;
 
 public class compiler {
 	public static int flag=0;
 	public static void main(String[] args){
-		int count=0;
-		String str=args[count++];
+		Scanner sc=new Scanner(args[0]);
+		String str=sc.next();
 		while(flag==0)
 		{
 			switch(str)
@@ -40,7 +41,7 @@ public class compiler {
 			default:
 				identify(str);
 			}
-			str=args[count++];
+			str=sc.next();
 		}
 		}
 	public static String transfer(String str)
@@ -50,10 +51,10 @@ public class compiler {
 	public static void identify(String str)
 	{
 		char c=str.charAt(0);
-		if((c<='Z'&&c>='A')||(c<='z'&&c>='a'))
+		if(Character.isLetter(c))
 		{
 			identify_ident(str);
-		}else if(c>='0'&&c<='9')
+		}else if(Character.isDigit(c))
 		{
 			identify_int(str);
 		}else
@@ -64,7 +65,7 @@ public class compiler {
 		char[]  c = str.toCharArray();
 		for(char h:c)
 		{
-			if((h<='Z'&&h>='A')||(h<='z'&&h>='a')||(h>='0'&&h<='9'))
+			if(Character.isLetter(h)||Character.isDigit(h))
 			{
 				continue;
 			}else
@@ -81,7 +82,7 @@ public class compiler {
 		int sum=0;
 		for(int i=0;i<str.length();i++)
 		{
-			if(c[i]>='0'&&c[i]<='9')
+			if(Character.isDigit(c[i]))
 			{
 				sum=sum*10+c[i]-'0';
 				continue;
