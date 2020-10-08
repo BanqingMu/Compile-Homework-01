@@ -18,7 +18,7 @@ public class compiler {
 		fis.close();
 		String[] sstr=string.split(" |\\n|\\t|\\r");
 		int i=-1;
-		while(flag==0&&i<sstr.length)
+		while(flag==0&&i+1<sstr.length)
 		{
 
 			String str=sstr[++i];
