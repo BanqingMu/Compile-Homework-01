@@ -17,10 +17,11 @@ public class compiler {
 		br.close();
 		fis.close();
 		String[] sstr=string.split(" |\\n|\\t|\\r");
-		int i=0;
-		String str=sstr[i++];
+		int i=-1;
 		while(flag==0&&i<sstr.length)
 		{
+
+			String str=sstr[++i];
 			if(str.length()!=0)
 			{
 			switch(str)
@@ -58,7 +59,6 @@ public class compiler {
 				identify(str);
 			}
 			}
-			str=sstr[i++];
 		}
 		}
 	public static String transfer(String str)
