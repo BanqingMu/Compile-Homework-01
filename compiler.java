@@ -18,6 +18,7 @@ public class compiler {
 		br.close();
 		fis.close();
 		char[] ch=string.toCharArray();
+		string+="            ";
 		int len=ch.length;
 		int i=0;
 		while(i<len)
