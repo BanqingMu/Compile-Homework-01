@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -22,11 +21,8 @@ public class compiler {
 		String str=sstr[i++];
 		while(flag==0&&i<sstr.length)
 		{
-			if(str==null||str=="")
+			if(str.length()!=0)
 			{
-				str=sstr[i++];
-				continue;
-			}
 			switch(str)
 			{
 			case "BEGIN":
@@ -60,6 +56,7 @@ public class compiler {
 				break;
 			default:
 				identify(str);
+			}
 			}
 			str=sstr[i++];
 		}
