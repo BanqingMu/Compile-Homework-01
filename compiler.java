@@ -60,8 +60,6 @@ public class compiler {
 			}
 			}
 		}
-		if(flag==1)
-			System.out.println("Unknown");
 		}
 	public static String transfer(String str)
 	{
@@ -77,7 +75,10 @@ public class compiler {
 		{
 			identify_int(str);
 		}else
+		{
 			flag=1;
+		System.out.println("Unknown");
+		}
 	}
 	public static void identify_ident(String str)
 	{
@@ -90,6 +91,7 @@ public class compiler {
 			}else
 			{
 				flag=1;
+				System.out.println("Unknown");
 				return;
 			}
 		}
