@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class compiler {
-	public static int flag=0;
+	public static String[] reserved= {"BEGIN","END","FOR","IF","THEN", "ELSE",":","+","*",",","(",")",":="};
+	public static String[] reserved_to= {"Begin","End","For","If","Then", "Else","Colon","Plus","Star","Comma","LParenthesis","RParenthesis","Assign"};
 	public static void main(String[] args) throws IOException{
 		FileInputStream fis=new FileInputStream(args[0]);
 		BufferedReader br=new BufferedReader(new InputStreamReader(fis));
@@ -16,104 +17,46 @@ public class compiler {
 		}
 		br.close();
 		fis.close();
-		String[] sstr=string.split(" |\\n|\\t|\\r");
-		int i=-1;
-		while(flag==0&&i+1<sstr.length)
+		char[] ch=string.toCharArray();
+		int len=ch.length;
+		int i=0;
+		while(i<len)
 		{
-
-			String str=sstr[++i];
-			if(str.length()!=0)
+			if(ch[i]!=' '&&ch[i]!='\n'&&ch[i]!='\t'&&ch[i]!='\r')
 			{
-			switch(str)
-			{
-			case "BEGIN":
-			case "END":
-			case "FOR":
-			case "IF":
-			case "THEN":
-			case "ELSE":
-				System.out.println(transfer(str));
-				break;
-			case ":":
-				System.out.println("Colon");
-				break;
-			case "+":
-				System.out.println("Plus");
-				break;
-			case "*":
-				System.out.println("Star");
-				break;
-			case ",":
-				System.out.println("Comma");
-				break;
-			case "(":
-				System.out.println("LParenthesis");
-				break;
-			case ")":
-				System.out.println("RParenthesis");
-				break;
-			case ":=":
-				System.out.println("Assign");
-				break;
-			default:
-				identify(str);
+				for(int j=0;j<reserved.length;j++)
+				{
+					if(reserved[j].equals(string.substring(i,i+reserved[j].length())))
+					{
+						System.out.println(reserved_to[j]);
+						i+=reserved[j].length();
+					}
+				}
+				if(Character.isDigit(ch[i]))
+				{
+					int sum=ch[i]-'0';
+					while(Character.isDigit(ch[++i]))
+					{
+						sum=sum*10+ch[i]-'0';
+					}
+					System.out.println("Int("+sum+")");
+					continue;
+				}else if(Character.isLetter(ch[i]))
+				{
+					temp=""+ch[i];
+					while(Character.isLetter(ch[++i])||Character.isDigit(ch[++i]))
+					{
+						temp+=ch[i];
+					}
+					System.out.println("Ident("+temp+")");
+					continue;
+				}else
+				{
+					System.out.println("Unknown");
+					break;
+				}
 			}
-			}
+			i++;
 		}
 		}
-	public static String transfer(String str)
-	{
-		return ((String)str.subSequence(0, 1)).toUpperCase()+str.substring(1).toLowerCase();
-	}
-	public static void identify(String str)
-	{
-		char c=str.charAt(0);
-		if(Character.isLetter(c))
-		{
-			identify_ident(str);
-		}else if(Character.isDigit(c))
-		{
-			identify_int(str);
-		}else
-		{
-			flag=1;
-			System.out.println("Unknown");
-		}
-	}
-	public static void identify_ident(String str)
-	{
-		char[]  c = str.toCharArray();
-		for(char h:c)
-		{
-			if(Character.isLetter(h)||Character.isDigit(h))
-			{
-				continue;
-			}else
-			{
-				flag=1;
-				System.out.println("Unknown");
-				return;
-			}
-		}
-		System.out.println("Ident("+str+")");
-	}
-	public static void identify_int(String str)
-	{
-		char[]  c = str.toCharArray();
-		int sum=0;
-		for(int i=0;i<str.length();i++)
-		{
-			if(Character.isDigit(c[i]))
-			{
-				sum=sum*10+c[i]-'0';
-				continue;
-			}else
-			{
-				System.out.println("Int("+sum+")");
-				identify_ident(str.substring(i));
-				return;
-			}
-		}
-		System.out.println("Int("+sum+")");
-	}
 }
