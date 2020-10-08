@@ -60,7 +60,6 @@ public class compiler {
 			}
 			}
 		}
-		System.out.println("******");
 		}
 	public static String transfer(String str)
 	{
