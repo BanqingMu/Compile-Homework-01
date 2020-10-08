@@ -18,7 +18,6 @@ public class compiler {
 		br.close();
 		fis.close();
 		char[] ch=string.toCharArray();
-		string+="            ";
 		int len=ch.length;
 		int i=0;
 		while(i<len)
@@ -27,10 +26,11 @@ public class compiler {
 			{
 				for(int j=0;j<reserved.length;j++)
 				{
-					if(reserved[j].equals(string.substring(i,i+reserved[j].length())))
+					if(i+reserved[j].length()<len && reserved[j].equals(string.subSequence(i, i+reserved[j].length())))
 					{
 						System.out.println(reserved_to[j]);
 						i+=reserved[j].length();
+						break;
 					}
 				}
 				if(Character.isDigit(ch[i]))
@@ -48,6 +48,13 @@ public class compiler {
 					while(Character.isLetter(ch[++i])||Character.isDigit(ch[++i]))
 					{
 						temp+=ch[i];
+					}
+					for(int j=0;j<reserved.length;j++)
+					{
+						if(reserved[j].equals(temp))
+						{
+							temp=reserved_to[j];
+						}
 					}
 					System.out.println("Ident("+temp+")");
 					continue;
