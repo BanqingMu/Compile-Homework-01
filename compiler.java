@@ -22,8 +22,6 @@ public class compiler {
 		int i=0;
 		while(i<len)
 		{
-			if(ch[i]!=' '&&ch[i]!='\n'&&ch[i]!='\t'&&ch[i]!='\r')
-			{
 				for(int j=0;j<reserved.length;j++)
 				{
 					if(i+reserved[j].length()<len && reserved[j].equals(string.subSequence(i, i+reserved[j].length())))
@@ -45,7 +43,7 @@ public class compiler {
 				}else if(Character.isLetter(ch[i]))
 				{
 					temp=""+ch[i++];
-					while(i<len&&Character.isLetter(ch[i])||Character.isDigit(ch[i]))
+					while(i<len&&(Character.isLetter(ch[i])||Character.isDigit(ch[i])))
 					{
 						temp+=ch[i];
 						i++;
@@ -59,13 +57,15 @@ public class compiler {
 					}
 					System.out.println("Ident("+temp+")");
 					continue;
+				}else if(ch[i]==' '||ch[i]=='\n'||ch[i]=='\t'||ch[i]=='\r')
+				{
+					i++;
+					continue;
 				}else
 				{
 					System.out.println("Unknown");
 					break;
 				}
-			}
-			i++;
 		}
 		}
 }
