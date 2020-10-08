@@ -60,6 +60,8 @@ public class compiler {
 			}
 			}
 		}
+		if(flag==1)
+			System.out.println("Unknown");
 		}
 	public static String transfer(String str)
 	{
