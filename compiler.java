@@ -45,7 +45,7 @@ public class compiler {
 				}else if(Character.isLetter(ch[i]))
 				{
 					temp=""+ch[i];
-					while(Character.isLetter(ch[++i])||Character.isDigit(ch[++i]))
+					while(i<len&&Character.isLetter(ch[++i])||Character.isDigit(ch[++i]))
 					{
 						temp+=ch[i];
 					}
