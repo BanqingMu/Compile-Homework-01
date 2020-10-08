@@ -36,7 +36,7 @@ public class compiler {
 				if(Character.isDigit(ch[i]))
 				{
 					int sum=ch[i]-'0';
-					while(Character.isDigit(ch[++i]))
+					while(i<len&&Character.isDigit(ch[++i]))
 					{
 						sum=sum*10+ch[i]-'0';
 					}
@@ -44,10 +44,11 @@ public class compiler {
 					continue;
 				}else if(Character.isLetter(ch[i]))
 				{
-					temp=""+ch[i];
-					while(i<len&&Character.isLetter(ch[++i])||Character.isDigit(ch[++i]))
+					temp=""+ch[i++];
+					while(i<len&&Character.isLetter(ch[i])||Character.isDigit(ch[i]))
 					{
 						temp+=ch[i];
+						i++;
 					}
 					for(int j=0;j<reserved.length;j++)
 					{
