@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class compiler {
-	public static String[] reserved= {"BEGIN","END","FOR","IF","THEN", "ELSE",":","+","*",",","(",")",":="};
-	public static String[] reserved_to= {"Begin","End","For","If","Then", "Else","Colon","Plus","Star","Comma","LParenthesis","RParenthesis","Assign"};
+	public static String[] reserved= {"BEGIN","END","FOR","IF","THEN", "ELSE","+","*",",","(",")",":=",":"};
+	public static String[] reserved_to= {"Begin","End","For","If","Then", "Else","Plus","Star","Comma","LParenthesis","RParenthesis","Assign","Colon"};
 	public static void main(String[] args) throws IOException{
 		FileInputStream fis=new FileInputStream(args[0]);
 		BufferedReader br=new BufferedReader(new InputStreamReader(fis));
@@ -20,7 +20,7 @@ public class compiler {
 		char[] ch=string.toCharArray();
 		int len=ch.length;
 		int i=0;
-		while(i<len)
+		LOOP:while(i<len)
 		{
 				for(int j=0;j<reserved.length;j++)
 				{
@@ -28,7 +28,7 @@ public class compiler {
 					{
 						System.out.println(reserved_to[j]);
 						i+=reserved[j].length();
-						break;
+						continue LOOP;
 					}
 				}
 				if(Character.isDigit(ch[i]))
@@ -47,13 +47,6 @@ public class compiler {
 					{
 						temp+=ch[i];
 						i++;
-					}
-					for(int j=0;j<reserved.length;j++)
-					{
-						if(reserved[j].equals(temp))
-						{
-							temp=reserved_to[j];
-						}
 					}
 					System.out.println("Ident("+temp+")");
 					continue;
