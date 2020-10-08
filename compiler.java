@@ -1,9 +1,12 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class compiler {
 	public static int flag=0;
-	public static void main(String[] args){
-		Scanner sc=new Scanner(args[0]);
+	public static void main(String[] args) throws FileNotFoundException{
+		FileInputStream fileinputstream=new FileInputStream(args[0]);
+		Scanner sc=new Scanner(fileinputstream);
 		String str=sc.next();
 		while(flag==0)
 		{
