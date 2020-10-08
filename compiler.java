@@ -77,7 +77,7 @@ public class compiler {
 		}else
 		{
 			flag=1;
-		System.out.println("Unknown");
+			System.out.println("Unknown");
 		}
 	}
 	public static void identify_ident(String str)
@@ -110,7 +110,7 @@ public class compiler {
 			}else
 			{
 				System.out.println("Int("+sum+")");
-				identify(str.substring(i));
+				identify_ident(str.substring(i));
 				return;
 			}
 		}
