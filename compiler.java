@@ -1,10 +1,9 @@
-import java.util.Scanner;
 
 public class compiler {
 	public static int flag=0;
 	public static void main(String[] args){
-		Scanner sc = new Scanner(System.in);
-		String str=sc.next();
+		int count=0;
+		String str=args[count++];
 		while(flag==0)
 		{
 			switch(str)
@@ -41,7 +40,7 @@ public class compiler {
 			default:
 				identify(str);
 			}
-			str=sc.next();
+			str=args[count++];
 		}
 		}
 	public static String transfer(String str)
